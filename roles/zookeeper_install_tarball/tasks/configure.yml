@@ -1,0 +1,26 @@
+---
+
+  # Updating Configuration File in Zookeeper.
+  - name: Updating Configuration File in Zookeeper.
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/zookeeper/conf/{{ item }}  owner={{ zookeeper_user }} group={{ zookeeper_group }}
+    with_items:
+      - zoo.cfg
+      - log4j.properties
+
+  # Copying zkServer-initialize.sh file.
+  - name: Copying zkServer-initialize.sh file
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/zookeeper/bin/{{ item }}  owner={{ zookeeper_user }} group={{ zookeeper_group }} mode=755
+    with_items:
+      - zkServer-initialize.sh
+
+  # Creating a directory for Zookeeper.
+  - name: Creating a directory for Zookeeper.
+    file: path={{ item }} owner={{ zookeeper_user }} group={{ zookeeper_group }} state=directory
+    with_items:
+      - "{{ zookeeper_data_store }}"
+      - "{{ zookeeper_logging }}"
+#    notify:
+#      - Restart Zookeeper.
+  - name: Install SystemD Configuration File for ZooKeeper.
+    template: src=zookeeper.service dest=/etc/systemd/system/zookeeper.service
+

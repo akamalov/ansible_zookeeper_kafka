@@ -1,0 +1,9 @@
+[zookeepernodes]
+192.168.120.161 zookeeper_id=1
+192.168.120.162 zookeeper_id=2
+192.168.120.163 zookeeper_id=3
+
+[kafkanodes]
+192.168.120.161 kafka_broker_id=1 kafka_port=9092
+192.168.120.162 kafka_broker_id=2 kafka_port=9092
+192.168.120.163 kafka_broker_id=3 kafka_port=9092

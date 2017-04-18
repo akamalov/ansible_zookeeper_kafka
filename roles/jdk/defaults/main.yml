@@ -1,0 +1,5 @@
+---
+# file: roles/jdk/defaults/main.yml
+
+jdk_download_filename: jdk-8u121-linux-x64.tar.gz
+jdk_version: jdk1.8.0_121

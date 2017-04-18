@@ -1,0 +1,18 @@
+---
+
+  - name: Updating Configuration File in kafka.
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/kafka/config/{{ item }} owner={{ kafka_user }} group={{ kafka_group }}
+    with_items:
+      - server.properties
+      - log4j.properties
+
+  - name: Creating a directory for kafka.
+    file: path={{ kafka_data_store }}/{{ item }} owner={{ kafka_user }} group={{ kafka_group }} state=directory
+    with_items:
+      - "{{ kafka_broker_id }}"
+
+  - name: Install SystemD Configuration File for Kafka.
+    template: src=kafka.service dest=/etc/systemd/system/kafka.service
+
+  - name: Start Kafka 
+    systemd: state=started name=kafka.service daemon_reload=yes

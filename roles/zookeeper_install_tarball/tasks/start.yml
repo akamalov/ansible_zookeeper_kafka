@@ -1,0 +1,11 @@
+---
+
+  # Starting Zookeeper Service.
+ - name: Start ZooKeeper
+   systemd: state=started name=zookeeper.service daemon_reload=yes
+#
+#  - name: Starting Zookeeper Server.
+#    command: chdir={{ zookeeper_logging }} sh {{ common['soft_link_base_path'] }}/zookeeper/bin/zkServer.sh start
+#    sudo: yes
+#    sudo_user: "{{ zookeeper_user }}"
+
